@@ -1,179 +1,241 @@
-local MainFrame = Instance.new("Frame")
+local GUI = Instance.new("ScreenGui")
+local OpenUi = Instance.new("ImageButton")
 local UICorner = Instance.new("UICorner")
-local Frame = Instance.new("Frame")
+local MainFrame = Instance.new("Frame")
 local UICorner_2 = Instance.new("UICorner")
-local Frame_2 = Instance.new("Frame")
-local Frame_3 = Instance.new("Frame")
-local Frame_4 = Instance.new("Frame")
+local Logo = Instance.new("ImageLabel")
+local NameHub = Instance.new("TextLabel")
+local GeneralTab = Instance.new("TextButton")
+local Page1 = Instance.new("ScrollingFrame")
+local ProfileName = Instance.new("TextLabel")
+local ProfileImage = Instance.new("ImageLabel")
 local UICorner_3 = Instance.new("UICorner")
-local ImageLabel = Instance.new("ImageLabel")
-local UICorner_4 = Instance.new("UICorner")
-local TextLabel = Instance.new("TextLabel")
-local cLOSEUI = Instance.new("TextButton")
-local UICorner_5 = Instance.new("UICorner")
-local Set = Instance.new("ImageButton")
-local UICorner_6 = Instance.new("UICorner")
-local NunuFrame = Instance.new("Frame")
-local UICorner_7 = Instance.new("UICorner")
-local TextLabel_2 = Instance.new("TextLabel")
-local CloseSet = Instance.new("ImageButton")
-local UICorner_8 = Instance.new("UICorner")
+local Page2 = Instance.new("ScrollingFrame")
+local locallv = Instance.new("TextLabel")
+local localrace = Instance.new("TextLabel")
+local localbeli = Instance.new("TextLabel")
+local localDevil = Instance.new("TextLabel")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+function dragify(Frame, object)
+	dragToggle = nil
+	dragSpeed = .25
+	dragInput = nil
+	dragStart = nil
+	dragPos = nil
+	function updateInput(input)
+		Delta = input.Position - dragStart
+		Position =
+			UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+		game:GetService("TweenService"):Create(object, TweenInfo.new(dragSpeed), {Position = Position}):Play()
+	end
+	Frame.InputBegan:Connect(
+		function(input)
+			if
+				(input.UserInputType == Enum.UserInputType.MouseButton1 or
+					input.UserInputType == Enum.UserInputType.Touch)
+			then
+				dragToggle = true
+				dragStart = input.Position
+				startPos = object.Position
+				input.Changed:Connect(
+					function()
+						if (input.UserInputState == Enum.UserInputState.End) then
+							dragToggle = false
+						end
+					end
+				)
+			end
+		end
+	)
+	Frame.InputChanged:Connect(
+		function(input)
+			if
+				(input.UserInputType == Enum.UserInputType.MouseMovement or
+					input.UserInputType == Enum.UserInputType.Touch)
+			then
+				dragInput = input
+			end
+		end
+	)
+	game:GetService("UserInputService").InputChanged:Connect(
+	function(input)
+		if (input == dragInput and dragToggle) then
+			updateInput(input)
+		end
+	end
+	)
+end
+GUI.Name = "GUI"
+GUI.Parent = game.CoreGui
+GUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
+OpenUi.Name = "OpenUi"
+OpenUi.Parent = GUI
+OpenUi.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+OpenUi.BorderColor3 = Color3.fromRGB(0, 0, 0)
+OpenUi.BorderSizePixel = 0
+OpenUi.Position = UDim2.new(0.054421775, 0, 0.0863509551, 0)
+OpenUi.Size = UDim2.new(0.0925662816, 0, 0.16839838, 0)
+OpenUi.Image = "rbxassetid://15640661640"
+
+UICorner.CornerRadius = UDim.new(0, 50)
+UICorner.Parent = OpenUi
 
 MainFrame.Name = "MainFrame"
-MainFrame.Parent = game.CoreGui
-MainFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+MainFrame.Parent = OpenUi
+MainFrame.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
 MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(-6.349648, 0, 1.94578362, 0)
-MainFrame.Size = UDim2.new(4.68276548, 0, 5.42307711, 0)
-MainFrame.Visible = false
+MainFrame.Position = UDim2.new(1.69351482, 0, -0.447033942, 0)
+MainFrame.Size = UDim2.new(8, 0, 7, 0)
 
-UICorner.Parent = MainFrame
+UICorner_2.CornerRadius = UDim.new(0, 10)
+UICorner_2.Parent = MainFrame
 
-Frame.Parent = MainFrame
-Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame.BorderSizePixel = 0
-Frame.Position = UDim2.new(0.0160673894, 0, 0.0198581554, 0)
-Frame.Size = UDim2.new(0.96617347, 0, 0.953900695, 0)
+Logo.Name = "Logo"
+Logo.Parent = MainFrame
+Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Logo.BackgroundTransparency = 1.000
+Logo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Logo.BorderSizePixel = 0
+Logo.Position = UDim2.new(0.0265957452, 0, 0.00787401572, 0)
+Logo.Size = UDim2.new(0.101063833, 0, 0.133858263, 0)
+Logo.Image = "rbxassetid://16663324629"
 
-UICorner_2.Parent = Frame
+NameHub.Name = "Name Hub"
+NameHub.Parent = MainFrame
+NameHub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+NameHub.BackgroundTransparency = 1.000
+NameHub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+NameHub.BorderSizePixel = 0
+NameHub.Position = UDim2.new(0.143617019, 0, 0, 0)
+NameHub.Size = UDim2.new(0.25, 0, 0.133858263, 0)
+NameHub.Font = Enum.Font.SourceSans
+NameHub.Text = "Attack Hub I "
+NameHub.TextColor3 = Color3.fromRGB(255, 255, 255)
+NameHub.TextScaled = true
+NameHub.TextSize = 14.000
+NameHub.TextWrapped = true
 
-Frame_2.Parent = MainFrame
-Frame_2.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
-Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_2.BorderSizePixel = 0
-Frame_2.Position = UDim2.new(0.0321346447, 0, 0.0425531901, 0)
-Frame_2.Size = UDim2.new(0.939881623, 0, 0.899999976, 0)
+GeneralTab.Name = "GeneralTab"
+GeneralTab.Parent = MainFrame
+GeneralTab.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+GeneralTab.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GeneralTab.BorderSizePixel = 0
+GeneralTab.Position = UDim2.new(0.409574479, 0, 0.032214772, 0)
+GeneralTab.Size = UDim2.new(0.182205766, 0, 0.0780214593, 0)
+GeneralTab.Font = Enum.Font.SourceSans
+GeneralTab.Text = "General"
+GeneralTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+GeneralTab.TextScaled = true
+GeneralTab.TextSize = 14.000
+GeneralTab.TextWrapped = true
 
-Frame_3.Parent = MainFrame
-Frame_3.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-Frame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_3.BorderSizePixel = 0
-Frame_3.Position = UDim2.new(0.0452806614, 0, 0.0680851042, 0)
-Frame_3.Size = UDim2.new(0.909207582, 0, 0.100000001, 0)
+Page1.Name = "Page1"
+Page1.Parent = MainFrame
+Page1.Active = true
+Page1.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+Page1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Page1.BorderSizePixel = 0
+Page1.Position = UDim2.new(0.0265958253, 0, 0.145370483, 0)
+Page1.Size = UDim2.new(0.450492531, 0, 0.821030021, 0)
 
-Frame_4.Parent = MainFrame
-Frame_4.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-Frame_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_4.BorderSizePixel = 0
-Frame_4.Position = UDim2.new(0.0321347341, 0, 0.791489363, 0)
-Frame_4.Size = UDim2.new(0.939881444, 0, 0.15106383, 0)
+ProfileName.Name = "ProfileName"
+ProfileName.Parent = Page1
+ProfileName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ProfileName.BackgroundTransparency = 1.000
+ProfileName.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ProfileName.BorderSizePixel = 0
+ProfileName.Position = UDim2.new(0.0356802382, 0, 0.138594255, 0)
+ProfileName.Size = UDim2.new(0.642244279, 0, 0.0513555445, 0)
+ProfileName.Font = Enum.Font.SourceSans
+ProfileName.Text = "Name :"..game.Players.LocalPlayer.Name
+ProfileName.TextColor3 = Color3.fromRGB(255, 255, 255)
+ProfileName.TextSize = 18.000
+ProfileName.TextWrapped = true
+ProfileName.TextXAlignment = Enum.TextXAlignment.Left
 
-UICorner_3.Parent = Frame_4
+ProfileImage.Name = "ProfileImage"
+ProfileImage.Parent = Page1
+ProfileImage.BackgroundColor3 = Color3.fromRGB(255, 85, 127)
+ProfileImage.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ProfileImage.BorderSizePixel = 0
+ProfileImage.Position = UDim2.new(0.0359028354, 0, -0.000995887443, 0)
+ProfileImage.Size = UDim2.new(0, 69, 0, 63)
+ProfileImage.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.UserId .. "&width=420&height=420&format=png"
 
-ImageLabel.Parent = MainFrame
-ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageLabel.BorderSizePixel = 0
-ImageLabel.Position = UDim2.new(0.045280572, 0, 0.0680851042, 0)
-ImageLabel.Size = UDim2.new(0.0883146971, 0, 0.100000001, 0)
-ImageLabel.Image = "http://www.roblox.com/asset/?id=15640661640"
+UICorner_3.CornerRadius = UDim.new(0, 50)
+UICorner_3.Parent = ProfileImage
 
-UICorner_4.Parent = ImageLabel
+Page2.Name = "Page2"
+Page2.Parent = MainFrame
+Page2.Active = true
+Page2.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+Page2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Page2.BorderSizePixel = 0
+Page2.Position = UDim2.new(0.538215816, 0, 0.141433507, 0)
+Page2.Size = UDim2.new(0.427159727, 0, 0.821029961, 0)
 
-TextLabel.Parent = MainFrame
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(0.201571539, 0, 0.0680851042, 0)
-TextLabel.Size = UDim2.new(0.517749846, 0, 0.100000001, 0)
-TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "Attack Hub"
-TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 14.000
-TextLabel.TextWrapped = true
+locallv.Name = "locallv"
+locallv.Parent = Page2
+locallv.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+locallv.BackgroundTransparency = 1.000
+locallv.BorderColor3 = Color3.fromRGB(0, 0, 0)
+locallv.BorderSizePixel = 0
+locallv.Position = UDim2.new(0.0835677236, 0, 0.00164613186, 0)
+locallv.Size = UDim2.new(0.642244279, 0, 0.0513555445, 0)
+locallv.Font = Enum.Font.SourceSans
+locallv.Text = "Level : "..game:GetService("Players").LocalPlayer.Data.Level.Value
+locallv.TextColor3 = Color3.fromRGB(255, 255, 255)
+locallv.TextSize = 18.000
+locallv.TextWrapped = true
+locallv.TextXAlignment = Enum.TextXAlignment.Left
 
-cLOSEUI.Name = "cLOSEUI"
-cLOSEUI.Parent = MainFrame
-cLOSEUI.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-cLOSEUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
-cLOSEUI.BorderSizePixel = 0
-cLOSEUI.Position = UDim2.new(1.3559618, 0, -0.358797014, 0)
-cLOSEUI.Size = UDim2.new(0.213548571, 0, 0.184397161, 0)
-cLOSEUI.Font = Enum.Font.SourceSans
-cLOSEUI.Text = "X"
-cLOSEUI.TextColor3 = Color3.fromRGB(0, 0, 0)
-cLOSEUI.TextScaled = true
-cLOSEUI.TextSize = 14.000
-cLOSEUI.TextWrapped = true
+localrace.Name = "localrace"
+localrace.Parent = Page2
+localrace.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+localrace.BackgroundTransparency = 1.000
+localrace.BorderColor3 = Color3.fromRGB(0, 0, 0)
+localrace.BorderSizePixel = 0
+localrace.Position = UDim2.new(0.0835677236, 0, 0.0724840015, 0)
+localrace.Size = UDim2.new(0.642244279, 0, 0.0513555445, 0)
+localrace.Font = Enum.Font.SourceSans
+localrace.Text = "Race : "..game:GetService("Players").LocalPlayer.Data.Race.Value
+localrace.TextColor3 = Color3.fromRGB(255, 255, 255)
+localrace.TextSize = 18.000
+localrace.TextWrapped = true
+localrace.TextXAlignment = Enum.TextXAlignment.Left
 
-UICorner_5.Parent = cLOSEUI
+localbeli.Name = "localbeli"
+localbeli.Parent = Page2
+localbeli.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+localbeli.BackgroundTransparency = 1.000
+localbeli.BorderColor3 = Color3.fromRGB(0, 0, 0)
+localbeli.BorderSizePixel = 0
+localbeli.Position = UDim2.new(0.0835677236, 0, 0.146611065, 0)
+localbeli.Size = UDim2.new(0.642244279, 0, 0.0513555445, 0)
+localbeli.Font = Enum.Font.SourceSans
+localbeli.Text = "Beli : "..game:GetService("Players").LocalPlayer.Data.Beli.Value
+localbeli.TextColor3 = Color3.fromRGB(255, 255, 255)
+localbeli.TextSize = 18.000
+localbeli.TextWrapped = true
+localbeli.TextXAlignment = Enum.TextXAlignment.Left
 
-Set.Name = "Set"
-Set.Parent = MainFrame
-Set.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Set.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Set.BorderSizePixel = 0
-Set.Position = UDim2.new(0.419210434, 0, 0.791489363, 0)
-Set.Size = UDim2.new(0.100000009, 0, 0.151063845, 0)
-Set.Image = "http://www.roblox.com/asset/?id=16162323955"
-
-UICorner_6.Parent = Set
-
-NunuFrame.Name = "NunuFrame"
-NunuFrame.Parent = Set
-NunuFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-NunuFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-NunuFrame.BorderSizePixel = 0
-NunuFrame.Position = UDim2.new(6.10770178, 0, -5.23942947, 0)
-NunuFrame.Size = UDim2.new(4.52993774, 0, 6.61971331, 0)
-NunuFrame.Visible = false
-
-UICorner_7.Parent = NunuFrame
-
-TextLabel_2.Parent = NunuFrame
-TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_2.BackgroundTransparency = 1.000
-TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_2.BorderSizePixel = 0
-TextLabel_2.Position = UDim2.new(0.18332845, 0, 0.0170212891, 0)
-TextLabel_2.Size = UDim2.new(0.571417987, 0, 0.100000001, 0)
-TextLabel_2.Font = Enum.Font.SourceSans
-TextLabel_2.Text = "Setting"
-TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_2.TextScaled = true
-TextLabel_2.TextSize = 14.000
-TextLabel_2.TextWrapped = true
-
-CloseSet.Name = "CloseSet"
-CloseSet.Parent = NunuFrame
-CloseSet.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-CloseSet.BorderColor3 = Color3.fromRGB(0, 0, 0)
-CloseSet.BorderSizePixel = 0
-CloseSet.Position = UDim2.new(-1.34829676, 0, 0.791488767, 0)
-CloseSet.Size = UDim2.new(0.220753431, 0, 0.151064038, 0)
-CloseSet.Image = "http://www.roblox.com/asset/?id=16162323955"
-
-UICorner_8.Parent = CloseSet
-
--- Scripts:
-
-local function KJDCVFH_fake_script() -- cLOSEUI.ClScript 
-	local script = Instance.new('Script', cLOSEUI)
-
-	function CloseGui ()
-		script.Parent.Parent.Parent.MainFrame.Visible = false
-	end
-	script.Parent.MouseButton1Click:Connect(CloseGui)
-end
-coroutine.wrap(KJDCVFH_fake_script)()
-local function GVMXYQ_fake_script() -- CloseSet.LocalScript 
-	local script = Instance.new('LocalScript', CloseSet)
-
-	script.Parent.MouseButton1Click:Connect(function()
-		script.Parent.Parent.Parent.NunuFrame.Visible = false
-	end)
-end
-coroutine.wrap(GVMXYQ_fake_script)()
-local function AHQSAM_fake_script() -- Set.LocalScript 
-	local script = Instance.new('LocalScript', Set)
-
-	script.Parent.MouseButton1Click:Connect(function()
-		script.Parent.NunuFrame.Visible = true
-	end)
-end
-coroutine.wrap(AHQSAM_fake_script)()
+localDevil.Name = "localDevil"
+localDevil.Parent = Page2
+localDevil.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+localDevil.BackgroundTransparency = 1.000
+localDevil.BorderColor3 = Color3.fromRGB(0, 0, 0)
+localDevil.BorderSizePixel = 0
+localDevil.Position = UDim2.new(0.0835677236, 0, 0.22864534, 0)
+localDevil.Size = UDim2.new(0.642244279, 0, 0.0513555445, 0)
+localDevil.Font = Enum.Font.SourceSans
+localDevil.Text = "Fragments : "..game:GetService("Players").LocalPlayer.Data.Fragments.Value
+localDevil.TextColor3 = Color3.fromRGB(255, 255, 255)
+localDevil.TextSize = 18.000
+localDevil.TextWrapped = true
+localDevil.TextXAlignment = Enum.TextXAlignment.Left
